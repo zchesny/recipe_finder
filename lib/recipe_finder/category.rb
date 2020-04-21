@@ -28,11 +28,17 @@ class RecipeFinder::Category
     category_1.url = "fakeurl"
 
     category_2 = self.new
-    category_2.name = "Apetizers and Snacks"
+    category_2.name = "Appetizers and Snacks"
     category_2.recipes = []
     category_2.url = "fakeurl"
 
     [category_1, category_2]
+  end
+
+  def self.scrape_allrecipes
+    doc = Nokogiri::HTML(open("https://www.allrecipes.com/"))
+    binding.pry
+    categories = doc.search("span.category-title").children.map{|el| el.text}
   end
 
 end
