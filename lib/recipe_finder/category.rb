@@ -5,13 +5,23 @@ class RecipeFinder::Category
   def self.list
     # I should return a list of recipe categories
     # here doc - giant strings
-    puts <<-DOC.gsub /^\s*/, ''
-      1. Quarantine Cooking
-      2. Appetizers and Snacks
-      ...
-      10. Slow Cooker Recipes
-      11. Soups, Stews, and Chili
-    DOC
+    # scrape allrecipes and then return categories based on that data
+    self.scrape_categories
+    #RecipeFinder::Scraper.new.categories
+
+
+  end
+
+  def self.scrape_categories
+    categories = []
+    # Go to allrecipes, find the scrape_categories
+    # Extract the category names
+    # Instantiate a category
+
+
+    categories
+
+
     category_1 = self.new
     category_1.name = "Quarantine Cooking"
     category_1.recipes = [] # keep as empty array until chosen, and then populate
