@@ -39,6 +39,13 @@ class RecipeFinder::Category
     doc = Nokogiri::HTML(open("https://www.allrecipes.com/"))
     binding.pry
     categories = doc.search("span.category-title").children.map{|el| el.text}
+    urls = doc.css(".grid-col--subnav").map{|el| el.attr("href")}
+    # url: doc.search("div #insideScroll").search("ul li").children
+    # deal.url = doc.search("a.wantone").first.attr("href").strip
+    # works: doc.search("div #insideScroll").search("ul li").search("a").attr("href").value
+    # works: doc.search("div #insideScroll").search("ul").search("li a").attr("href").value
+    #  ms = doc.css(".grid-col--subnav")
+    # ms.each{|el| el.attr("href")}
   end
 
 end
