@@ -18,8 +18,10 @@ class RecipeFinder::Category
   end
 
   def self.list
+    puts "\nCategories List:".colorize(:cyan)
+    puts "----------------------"
     self.all.each.with_index(1) do |category, i|
-      puts "#{i}. #{category.name}"
+      puts "#{i}. #{category.name}".colorize(:cyan)
     end
   end
 
@@ -27,12 +29,10 @@ class RecipeFinder::Category
   def list_recipes
     # check if recipes have been retrieved yet
     # if not, retrieve them first; else list them
-    if self.recipes == []
-      self.make_recipes
-    end
-    self.recipes.each.with_index(1) do |recipe, i|
-      puts "#{i}. #{recipe.name}"
-    end
+    self.make_recipes if self.recipes == []
+    puts "\nRecipes for #{self.name}: ".colorize(:light_green)
+    puts "----------------------"
+    self.recipes.each.with_index(1){|recipe, i| puts "#{i}. #{recipe.name}".colorize(:light_green)}
   end
 
   def self.find_by_index(index)

@@ -33,18 +33,18 @@ class RecipeFinder::Recipe
   def display
     # check if loaded, if not load and complete
     self.add_recipe_attributes if !loaded
-    puts "----------------------".colorize(:light_green)
+    puts "\n----------------------".colorize(:light_green)
     puts "#{self.name.upcase}".colorize(:cyan)
-    puts "  author:".colorize(:light_magenta) + " #{self.author}"
-    puts "  rating:".colorize(:light_magenta) + " #{self.rating}"
-    puts "  description:".colorize(:light_magenta) + "#{self.description}"
+    puts "  author: ".colorize(:light_magenta) + "#{self.author}"
+    puts "  rating: ".colorize(:light_magenta) + "#{self.rating}"
+    puts "  description: ".colorize(:light_magenta) + "#{self.description}"
     # puts "  total time:".colorize(:light_magenta) + "#{self.total_time}"
     puts "  ingredients:".colorize(:yellow)
     self.ingredients.each{|ing| puts "    - ".colorize(:yellow) + "#{ing}"}
     puts "  directions:".colorize(:light_green)
     self.directions.each.with_index(1){|dir, i| puts "    #{i}. ".colorize(:light_green) + "#{dir}"}
     puts "  nutrition facts (per serving): ".colorize(:light_magenta) + "#{self.nutrition}"
-    puts "  url:".colorize(:light_magenta) + " #{self.url}"
+    puts "  url: ".colorize(:light_magenta) + "#{self.url}"
     puts "----------------------".colorize(:light_green)
   end
 
