@@ -56,10 +56,10 @@ class RecipeFinder::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        the_category = @categories[input.to_i - 1]
+        the_category = RecipeFinder::Category.find_by_index(input.to_i)
         puts "DETAILS #{the_category.name}"
       elsif input == "list"
-        list_recipe_categories
+        list_categories
       else
         puts "Not sure what you want, type 'list' or 'exit'"
       end
