@@ -56,8 +56,11 @@ class RecipeFinder::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        the_category = RecipeFinder::Category.find_by_index(input.to_i)
-        puts "DETAILS #{the_category.name}"
+        category = RecipeFinder::Category.find_by_index(input.to_i)
+        # print recipes from the category
+        puts "Most Made Today Recipes for #{category.name}:"
+        category.list_recipes
+        recipe_menu(category)
       elsif input == "list"
         list_categories
       else
@@ -65,6 +68,30 @@ class RecipeFinder::CLI
       end
 
     end
+  end
+
+  def recipe_menu(category)
+    input = nil
+    while input != "exit"
+      puts "\n Enter the number of the recipe you'd like to know more about or type 'exit' or type 'categories' to see the categories again or type 'recipes' to see the recipes again"
+      input = gets.strip.downcase
+
+      if input.to_i > 0
+        recipe = category.find_recipe_by_index(input.to_i)
+        recipe.display
+      elsif input == "recipes"
+        category.list_recipes
+      elsif input == "categories"
+        menu
+      else
+        puts "Not sure what you want, type 'categories', 'recipes', or 'exit'"
+      end
+
+    end
+  end
+
+  def list_recipes
+
   end
 
   def goodbye

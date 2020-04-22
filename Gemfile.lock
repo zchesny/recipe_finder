@@ -2,12 +2,14 @@ PATH
   remote: .
   specs:
     recipe_finder (0.1.0)
+      colorize
       nokogiri
 
 GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.2)
+    colorize (0.8.1)
     method_source (1.0.0)
     mini_portile2 (2.4.0)
     nokogiri (1.10.9)

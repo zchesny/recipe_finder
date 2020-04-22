@@ -3,6 +3,7 @@
 # Require version
 require 'open-uri' # part of standard lib, so don't need to require it with the gem spec
 require 'nokogiri'
+require 'colorize'
 require 'pry'
 
 require_relative '../lib/recipe_finder/version'
