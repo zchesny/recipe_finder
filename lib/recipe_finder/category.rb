@@ -35,17 +35,6 @@ class RecipeFinder::Category
     end
   end
 
-  # def get_recipes
-  #   # Should check if recipes already exist, and if not scrape the page for recipes
-  #   # scrape the category page on the website to find the top 4 most made today recipes
-  #   RecipeFinder::Scrape.scrape_recipes
-  # end
-
-  # def retrieve_recipes
-  #   recipes = RecipeFinder::Scraper.scrape_recipes
-  #   recipes.each{|recipe| self.recipes << recipe}
-  # end
-
   def self.find_by_index(index)
     self.all.detect{|category| category.index == index}
   end
@@ -54,9 +43,8 @@ class RecipeFinder::Category
     self.recipes.detect{|recipe| recipe.index == index}
   end
 
-  BASE_PATH = "https://www.allrecipes.com/recipes/76/appetizers-and-snacks/?internalSource=top%20hubs&referringContentType=Homepage"
   def make_recipes
-    recipe_hash_array = RecipeFinder::Scraper.scrape_recipes(BASE_PATH)
+    recipe_hash_array = RecipeFinder::Scraper.scrape_recipes(self.url)
     recipe_array = RecipeFinder::Recipe.create_from_collection(recipe_hash_array)
     recipe_array.each{|recipe| self.recipes << recipe}
   end

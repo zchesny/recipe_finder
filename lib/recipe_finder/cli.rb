@@ -93,10 +93,6 @@ class RecipeFinder::CLI
     end
   end
 
-  def list_recipes
-
-  end
-
   def goodbye
     puts "See you tomorrow for more recipes!!!"
   end
