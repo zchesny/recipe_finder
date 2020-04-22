@@ -28,7 +28,7 @@ class RecipeFinder::Category
     # check if recipes have been retrieved yet
     # if not, retrieve them first; else list them
     if self.recipes == []
-      self.retrieve_recipes
+      self.make_recipes
     end
     self.recipes.each.with_index(1) do |recipe, i|
       puts "#{i}. #{recipe.name}"
@@ -41,10 +41,10 @@ class RecipeFinder::Category
   #   RecipeFinder::Scrape.scrape_recipes
   # end
 
-  def retrieve_recipes
-    recipes = RecipeFinder::Scraper.scrape_recipes
-    recipes.each{|recipe| self.recipes << recipe}
-  end
+  # def retrieve_recipes
+  #   recipes = RecipeFinder::Scraper.scrape_recipes
+  #   recipes.each{|recipe| self.recipes << recipe}
+  # end
 
   def self.find_by_index(index)
     self.all.detect{|category| category.index == index}
@@ -52,6 +52,13 @@ class RecipeFinder::Category
 
   def find_recipe_by_index(index)
     self.recipes.detect{|recipe| recipe.index == index}
+  end
+
+  BASE_PATH = "https://www.allrecipes.com/recipes/76/appetizers-and-snacks/?internalSource=top%20hubs&referringContentType=Homepage"
+  def make_recipes
+    recipe_hash_array = RecipeFinder::Scraper.scrape_recipes(BASE_PATH)
+    recipe_array = RecipeFinder::Recipe.create_from_collection(recipe_hash_array)
+    recipe_array.each{|recipe| self.recipes << recipe}
   end
 
   # def add_student_attributes(attributes_hash)
