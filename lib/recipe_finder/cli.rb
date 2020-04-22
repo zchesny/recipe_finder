@@ -33,25 +33,20 @@ class RecipeFinder::CLI
   # end
 
   def call
+    make_categories
     list_categories
     menu
     goodbye
   end
 
-  def list_categories
-    # Make categories
-    puts "Today's Recipes:"
-    # get recipe categories
-    @categories = RecipeFinder::Category.list
-    # starts index at 1
-    @categories.each.with_index(1) do |category, i|
-      puts "#{i}. #{category.name}"
-    end
+  def make_categories
+    category_array = RecipeFinder::Scraper.scrape_categories(BASE_PATH)
+    RecipeFinder::Category.create_from_collection(category_array)
   end
 
-  def make_categories
-    category_array = Scraper.scrape_categories(BASE_PATH)
-    Category.create_from_collection(category_array)
+  def list_categories
+    puts "Categories:"
+    RecipeFinder::Category.list
   end
 
   def menu
