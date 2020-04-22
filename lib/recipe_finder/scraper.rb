@@ -20,13 +20,22 @@ class RecipeFinder::Scraper
         break
       end
       recipes << {name: el.search("h3").text.strip,
+        rating: el.css("div.rating-stars span.stars").attr("aria-label").value,
         url: el.search("a").attr("href").value,
         index: i}
     end
     recipes
   end
 
-  def self.scrape_recipe(recipe_url)
+  def self.scrape_recipe(recipe_url="https://www.allrecipes.com/recipe/279285/ranch-zucchini-chips/")
+    doc = Nokogiri::HTML(open(recipe_url))
+    {
+      author: doc.css("span.author-name").text.strip,
+      description: doc.css("p.margin-0-auto").text.strip,
+      ingredients: doc.css("ul.ingredients-section li").map{|el| el.css("span.ingredients-item-name").text.strip},
+      directions: doc.css("ul.instructions-section li").map{|el| el.css("div.section-body p").text.strip},
+      nutrition: doc.css("div.recipe-nutrition-section div.section-body").text.strip.gsub(/\s{5}/, "").gsub("Full Nutrition", "")
+    }
   end
 
 end

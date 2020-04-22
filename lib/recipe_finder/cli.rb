@@ -6,35 +6,6 @@ class RecipeFinder::CLI
 
   BASE_PATH = "https://www.allrecipes.com/"
 
-  # def run
-  #   make_students
-  #   add_attributes_to_students
-  #   display_students
-  # end
-  #
-
-  #
-  # def add_attributes_to_students
-  #   Student.all.each do |student|
-  #     attributes = Scraper.scrape_profile_page(BASE_PATH + student.profile_url)
-  #     student.add_student_attributes(attributes)
-  #   end
-  # end
-  #
-  # def display_students
-  #   Student.all.each do |student|
-  #     puts "#{student.name.upcase}".colorize(:blue)
-  #     puts "  location:".colorize(:light_blue) + " #{student.location}"
-  #     puts "  profile quote:".colorize(:light_blue) + " #{student.profile_quote}"
-  #     puts "  bio:".colorize(:light_blue) + " #{student.bio}"
-  #     puts "  twitter:".colorize(:light_blue) + " #{student.twitter}"
-  #     puts "  linkedin:".colorize(:light_blue) + " #{student.linkedin}"
-  #     puts "  github:".colorize(:light_blue) + " #{student.github}"
-  #     puts "  blog:".colorize(:light_blue) + " #{student.blog}"
-  #     puts "----------------------".colorize(:green)
-  #   end
-  # end
-
   def call
     make_categories
     list_categories
@@ -81,6 +52,7 @@ class RecipeFinder::CLI
 
       if input.to_i > 0
         recipe = category.find_recipe_by_index(input.to_i)
+        # If recipe has all the attributes, display it; else retrieve attributes 
         recipe.display
       elsif input == "recipes"
         category.list_recipes

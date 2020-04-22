@@ -46,11 +46,11 @@ What is a recipe?
 - A recipe has a name
 - A recipe has an author
 - A recipe has a rating (stars)
-- A recipe has a quote (?)
+- A recipe has a description
 - A recipe has ingredients
 - A recipe has directions
-- A recipe has prep time
-- A recipe has cook time
-- A recipe has total time ("ready in")
+- A recipe has prep time: X
+- A recipe has cook time: X
+- A recipe has total time ("ready in"): X (TOO HARD TO PARSE)
 - A recipe has nutrition facts
-- A recipe has a url 
+- A recipe has a url
