@@ -1,27 +1,19 @@
 class RecipeFinder::Category
 
-  attr_accessor :name, :recipes, :url
+  attr_accessor :name, :url, :recipes
+
+  @@all = []
 
   def self.list
     # I should return a list of recipe categories
     # here doc - giant strings
     # scrape allrecipes and then return categories based on that data
-    self.scrape_categories
+    self.create_categories
     #RecipeFinder::Scraper.new.categories
-
-
   end
 
-  def self.scrape_categories
-    categories = []
-    # Go to allrecipes, find the scrape_categories
-    # Extract the category names
-    # Instantiate a category
 
-
-    categories
-
-
+  def self.create_categories
     category_1 = self.new
     category_1.name = "Quarantine Cooking"
     category_1.recipes = [] # keep as empty array until chosen, and then populate
@@ -35,17 +27,26 @@ class RecipeFinder::Category
     [category_1, category_2]
   end
 
-  def self.scrape_allrecipes
-    doc = Nokogiri::HTML(open("https://www.allrecipes.com/"))
-    binding.pry
-    categories = doc.search("span.category-title").children.map{|el| el.text}
-    urls = doc.css(".grid-col--subnav").map{|el| el.attr("href")}
-    # url: doc.search("div #insideScroll").search("ul li").children
-    # deal.url = doc.search("a.wantone").first.attr("href").strip
-    # works: doc.search("div #insideScroll").search("ul li").search("a").attr("href").value
-    # works: doc.search("div #insideScroll").search("ul").search("li a").attr("href").value
-    #  ms = doc.css(".grid-col--subnav")
-    # ms.each{|el| el.attr("href")}
+
+  # def initialize(category_hash)
+  #   category_hash.each{|k, v| self.send("#{k}=", v)}
+  #   self.class.all << self
+  # end
+
+  def self.create_from_collection(category_array)
+    category_array.each{|category_hash| Catgory.new(category_hash)}
   end
+
+  def add_recipes(recipes)
+  end
+
+  def self.all
+    @@all
+  end
+
+  # def add_student_attributes(attributes_hash)
+  #   attributes_hash.each{|k, v| self.send("#{k}=", v)}
+  # end
+
 
 end

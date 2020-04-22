@@ -1,13 +1,45 @@
 # Our CLI Controller
 class RecipeFinder::CLI
 
+  BASE_PATH = "https://www.allrecipes.com/"
+
+  # def run
+  #   make_students
+  #   add_attributes_to_students
+  #   display_students
+  # end
+  #
+
+  #
+  # def add_attributes_to_students
+  #   Student.all.each do |student|
+  #     attributes = Scraper.scrape_profile_page(BASE_PATH + student.profile_url)
+  #     student.add_student_attributes(attributes)
+  #   end
+  # end
+  #
+  # def display_students
+  #   Student.all.each do |student|
+  #     puts "#{student.name.upcase}".colorize(:blue)
+  #     puts "  location:".colorize(:light_blue) + " #{student.location}"
+  #     puts "  profile quote:".colorize(:light_blue) + " #{student.profile_quote}"
+  #     puts "  bio:".colorize(:light_blue) + " #{student.bio}"
+  #     puts "  twitter:".colorize(:light_blue) + " #{student.twitter}"
+  #     puts "  linkedin:".colorize(:light_blue) + " #{student.linkedin}"
+  #     puts "  github:".colorize(:light_blue) + " #{student.github}"
+  #     puts "  blog:".colorize(:light_blue) + " #{student.blog}"
+  #     puts "----------------------".colorize(:green)
+  #   end
+  # end
+
   def call
-    list_recipe_categories
+    list_categories
     menu
     goodbye
   end
 
-  def list_recipe_categories
+  def list_categories
+    # Make categories
     puts "Today's Recipes:"
     # get recipe categories
     @categories = RecipeFinder::Category.list
@@ -15,6 +47,11 @@ class RecipeFinder::CLI
     @categories.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end
+  end
+
+  def make_categories
+    category_array = Scraper.scrape_categories(BASE_PATH)
+    Category.create_from_collection(category_array)
   end
 
   def menu
