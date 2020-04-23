@@ -29,6 +29,10 @@ class RecipeFinder::Recipe
     end
   end
 
+  def open_in_browser
+    system("open '#{self.url}'")
+  end
+
   def display
     # check if loaded, if not load and display
     self.add_recipe_attributes if !loaded

@@ -113,6 +113,9 @@ class RecipeFinder::CLI
     if input.to_i.between?(1, category.recipe_count)
       recipe = category.find_recipe_by_index(input.to_i)
       recipe.display
+      puts "\nWould you like to open in browser [y/N]?".colorize(:yellow)
+      input2 = gets.strip.downcase
+      recipe.open_in_browser if input2 == 'y'
       menu2(category)
     elsif input.downcase == "back"
       puts "Returning to #{category.name} Menu.".colorize(:light_red)
