@@ -13,7 +13,7 @@ class RecipeFinder::CLI
   end
 
   def hello
-    puts "Hi! Welcome to Command Line Recipe Finder.".colorize(:cyan)
+    puts "\nHi! Welcome to Command Line Recipe Finder.".colorize(:cyan)
   end
 
   def make_categories
@@ -31,24 +31,15 @@ class RecipeFinder::CLI
     when "help"
       help
     when "cook"
-      search
+      cook_category
     when "list"
-      categories
+      list_categories
     when "quit"
       quit
     else
       puts "I'm sorry, I don't know that command.".colorize(:light_red)
       main_menu
     end
-  end
-
-  def quit
-    puts "\nSee you later for more recipe finding!!!".colorize(:cyan)
-  end
-
-  def categories
-    RecipeFinder::Category.list
-    main_menu
   end
 
   def help
@@ -60,7 +51,12 @@ class RecipeFinder::CLI
     main_menu
   end
 
-  def search
+  def list_categories
+    RecipeFinder::Category.list
+    main_menu
+  end
+
+  def cook_category
     puts "\nPlease enter the category number you'd like to search:".colorize(:yellow)
     input = gets.strip
     if input.to_i.between?(1, RecipeFinder::Category.count)
@@ -72,8 +68,12 @@ class RecipeFinder::CLI
       main_menu
     else
       puts "Sorry, invalid entry. Please enter a valid category number from the list or enter 'back'.".colorize(:light_red)
-      search
+      cook_category
     end
+  end
+
+  def quit
+    puts "\nSee you later for more recipe finding!!!".colorize(:cyan)
   end
 
   def menu2(category)
@@ -86,11 +86,11 @@ class RecipeFinder::CLI
     when "help"
       help2(category)
     when "cook"
-      recipe(category)
+      cook_recipe(category)
     when "list"
-      recipes(category)
+      list_recipes(category)
     when "back"
-      categories
+      list_categories
     when "quit"
       quit
     else
@@ -109,13 +109,7 @@ class RecipeFinder::CLI
     menu2(category)
   end
 
-
-  def recipes(category)
-    category.list_recipes
-    menu2(category)
-  end
-
-  def recipe(category)
+  def cook_recipe(category)
     puts "\nWhich recipe number would you like to know how to make?".colorize(:yellow)
     input = gets.strip
     # check if input in range
@@ -128,8 +122,13 @@ class RecipeFinder::CLI
       menu2(category)
     else
       puts "Sorry, invalid entry. Please enter a valid recipe number from the list or enter 'back'.".colorize(:light_red)
-      recipe(category)
+      cook_recipe(category)
     end
+  end
+
+  def list_recipes(category)
+    category.list_recipes
+    menu2(category)
   end
 
 end
