@@ -115,7 +115,7 @@ class RecipeFinder::CLI
       recipe.display
       puts "\nWould you like to open in browser [y/N]?".colorize(:yellow)
       input2 = gets.strip.downcase
-      recipe.open_in_browser if input2 == 'y'
+      recipe.open_in_browser if ['y', 'yes'].include?(input2)
       menu2(category)
     elsif input.downcase == "back"
       puts "Returning to #{category.name} Menu.".colorize(:light_red)
