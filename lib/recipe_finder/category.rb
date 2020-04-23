@@ -17,6 +17,14 @@ class RecipeFinder::Category
     @@all
   end
 
+  def self.count
+    self.all.size
+  end
+
+  def recipe_count
+    self.recipes.size
+  end
+
   def self.list
     puts "\nCategories List:".colorize(:light_magenta)
     puts "----------------------".colorize(:light_magenta)

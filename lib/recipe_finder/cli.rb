@@ -63,13 +63,16 @@ class RecipeFinder::CLI
   def search
     puts "\nPlease enter the category number you'd like to search:".colorize(:yellow)
     input = gets.strip
-    if input.to_i > 0
+    if input.to_i.between?(1, RecipeFinder::Category.count)
       category = RecipeFinder::Category.find_by_index(input.to_i)
       category.list_recipes
       menu2(category)
-    else
-      puts "Sorry, invalid entry. Returning to Main Menu.".colorize(:light_red)
+    elsif input.downcase == "back"
+      puts "Returning to Returning to Main Menu".colorize(:light_red)
       main_menu
+    else
+      puts "Sorry, invalid entry. Please enter a valid category number from the list or enter 'back'.".colorize(:light_red)
+      search
     end
   end
 
@@ -115,13 +118,17 @@ class RecipeFinder::CLI
   def recipe(category)
     puts "\nWhich recipe number would you like to know how to make?".colorize(:yellow)
     input = gets.strip
-    if input.to_i > 0
+    # check if input in range
+    if input.to_i.between?(1, category.recipe_count)
       recipe = category.find_recipe_by_index(input.to_i)
       recipe.display
       menu2(category)
-    else
-      puts "Sorry, invalid entry. Returning to #{cateogry.name} Menu.".colorize(:light_red)
+    elsif input.downcase == "back"
+      puts "Returning to #{category.name} Menu.".colorize(:light_red)
       menu2(category)
+    else
+      puts "Sorry, invalid entry. Please enter a valid recipe number from the list or enter 'back'.".colorize(:light_red)
+      recipe(category)
     end
   end
 
