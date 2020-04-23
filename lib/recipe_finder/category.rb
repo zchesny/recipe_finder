@@ -25,25 +25,22 @@ class RecipeFinder::Category
     end
   end
 
-  # instance method because you list recipes belonging to an instance
+  def self.find_by_index(index)
+    self.all.detect{|category| category.index == index}
+  end
+
   def list_recipes
-    # check if recipes have been retrieved yet
-    # if not, retrieve them first; else list them
-    self.make_recipes if self.recipes == []
+    self.get_recipes if self.recipes == []
     puts "\nRecipes for #{self.name}: ".colorize(:light_green)
     puts "----------------------"
     self.recipes.each.with_index(1){|recipe, i| puts "#{i}. #{recipe.name}".colorize(:light_green)}
-  end
-
-  def self.find_by_index(index)
-    self.all.detect{|category| category.index == index}
   end
 
   def find_recipe_by_index(index)
     self.recipes.detect{|recipe| recipe.index == index}
   end
 
-  def make_recipes
+  def get_recipes
     recipe_hash_array = RecipeFinder::Scraper.scrape_recipes(self.url)
     recipe_array = RecipeFinder::Recipe.create_from_collection(recipe_hash_array)
     recipe_array.each{|recipe| self.recipes << recipe}

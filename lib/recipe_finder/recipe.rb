@@ -42,7 +42,9 @@ class RecipeFinder::Recipe
     puts "  ingredients:".colorize(:yellow)
     self.ingredients.each{|ing| puts "    - ".colorize(:yellow) + "#{ing}"}
     puts "  directions:".colorize(:light_green)
-    self.directions.each.with_index(1){|dir, i| puts "    #{i}. ".colorize(:light_green) + "#{dir}"}
+    self.directions.each.with_index(1) do |dir, i|
+      puts "    #{i}. ".colorize(:light_green) + "#{dir}" if dir != ""
+    end
     puts "  nutrition facts (per serving): ".colorize(:light_magenta) + "#{self.nutrition}"
     puts "  url: ".colorize(:light_magenta) + "#{self.url}"
     puts "----------------------".colorize(:light_green)
