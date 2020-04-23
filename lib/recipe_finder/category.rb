@@ -18,10 +18,10 @@ class RecipeFinder::Category
   end
 
   def self.list
-    puts "\nCategories List:".colorize(:cyan)
-    puts "----------------------"
+    puts "\nCategories List:".colorize(:light_magenta)
+    puts "----------------------".colorize(:light_magenta)
     self.all.each.with_index(1) do |category, i|
-      puts "#{i}. #{category.name}".colorize(:cyan)
+      puts "#{i}. #{category.name}".colorize(:light_magenta)
     end
   end
 
@@ -32,7 +32,7 @@ class RecipeFinder::Category
   def list_recipes
     self.get_recipes if self.recipes == []
     puts "\nRecipes for #{self.name}: ".colorize(:light_green)
-    puts "----------------------"
+    puts "----------------------".colorize(:light_green)
     self.recipes.each.with_index(1){|recipe, i| puts "#{i}. #{recipe.name}".colorize(:light_green)}
   end
 

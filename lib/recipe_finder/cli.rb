@@ -23,18 +23,18 @@ class RecipeFinder::CLI
 
   def main_menu
     puts "\nWelcome to the Main Menu!".colorize(:cyan)
-    puts "I accept: help, search, categories, and quit.".colorize(:cyan)
+    puts "#{"I accept:".colorize(:cyan)} #{"help".colorize(:yellow)}, #{"cook".colorize(:light_green)}, #{"list".colorize(:light_magenta)}, and #{"quit".colorize(:red)}."
     puts "What would you like to do?".colorize(:yellow)
     input = gets.strip.downcase
 
     case input
     when "help"
       help
-    when "search"
+    when "cook"
       search
-    when "categories"
+    when "list"
       categories
-    when quit
+    when "quit"
       quit
     else
       puts "I'm sorry, I don't know that command.".colorize(:light_red)
@@ -52,10 +52,10 @@ class RecipeFinder::CLI
   end
 
   def help
-    puts "Main Menu Commands:".colorize(:cyan)
-    puts "  help".colorize(:yellow) + " - Brings up this dialog"
-    puts "  search".colorize(:light_green) + " - Will prompt for a category and find recipes from that category"
-    puts "  categories".colorize(:cyan) + " - Will list all the recipe categories"
+    puts "\nMain Menu Commands:".colorize(:cyan)
+    puts "  help".colorize(:yellow) + " - Brings up this dialog."
+    puts "  cook".colorize(:light_green) + " - Will prompt for a category and find recipes from that category."
+    puts "  list".colorize(:light_magenta) + " - Will list all the recipe categories."
     puts "  quit".colorize(:red) + " - Will exit this program."
     main_menu
   end
@@ -75,18 +75,18 @@ class RecipeFinder::CLI
 
   def menu2(category)
     puts "\nYou are currently in the #{category.name} Category.".colorize(:cyan)
-    puts "I accept: help, recipe, recipes, categories, and quit.".colorize(:cyan)
+    puts "#{"I accept:".colorize(:cyan)} #{"help".colorize(:yellow)}, #{"cook".colorize(:light_green)}, #{"list".colorize(:light_magenta)}, #{"back".colorize(:light_blue)}, and #{"quit".colorize(:red)}."
     puts "What would you like to do?".colorize(:yellow)
     input = gets.strip.downcase
 
     case input
     when "help"
       help2(category)
-    when "recipe"
+    when "cook"
       recipe(category)
-    when "recipes"
+    when "list"
       recipes(category)
-    when "categories"
+    when "back"
       categories
     when "quit"
       quit
@@ -94,6 +94,16 @@ class RecipeFinder::CLI
       puts "I'm sorry, I don't know that command.".colorize(:light_red)
       menu2(category)
     end
+  end
+
+  def help2(category)
+    puts "\n#{category.name} Menu Commands:".colorize(:cyan)
+    puts "  help".colorize(:yellow) + " - Brings up this dialog."
+    puts "  cook".colorize(:light_green) + " - Will prompt for a recipe and return information about that recipe."
+    puts "  list".colorize(:light_magenta) + " - Will list all the recipes in #{category.name} category."
+    puts "  back".colorize(:light_blue) + " - Will list all the recipe categories and bring you back to the main menu."
+    puts "  quit".colorize(:red) + " - Will exit this program."
+    menu2(category)
   end
 
 
@@ -113,16 +123,6 @@ class RecipeFinder::CLI
       puts "Sorry, invalid entry. Returning to #{cateogry.name} Menu.".colorize(:light_red)
       menu2(category)
     end
-  end
-
-  def help2(category)
-    puts "#{category.name} Menu Commands:".colorize(:cyan)
-    puts "  help".colorize(:yellow) + " - Brings up this dialog"
-    puts "  recipe".colorize(:light_green) + " - Will prompt for a recipe and return information about that recipe"
-    puts "  recipes".colorize(:light_magenta) + " - Will list all the recipes in this category"
-    puts "  categories".colorize(:cyan) + " - Will list all the recipe categories and bring you back to the main menu"
-    puts "  quit".colorize(:red) + " - Will exit this program."
-    menu2(category)
   end
 
 end
