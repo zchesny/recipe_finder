@@ -1,8 +1,8 @@
 # RecipeFinder
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/recipe_finder`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a command line interface Ruby Gem that explores categories and recipes from the [AllRecipes website](https://www.allrecipes.com/).
+It allows the user to search through categories and select a recipe to find out a description, ingredients, directions, and more!
+It retrieves the most up-to-date Top 10 Most Made Today Recipes from each of the listed categories.
 
 ## Installation
 
@@ -22,7 +22,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To run this gem, clone or download this repo and run: `./bin/recipe-finder`
+
+### Recommended Steps:
+
+1. You will be greeted with a Main Menu. Enter 'help' to see your options.
+2. Enter 'list' to see the Recipe Categories.
+3. Enter 'cook' to select a Recipe Category. Follow the prompts on the screen.
+4. Enter 'help' to learn the new options from this Category Menu.
+5. Enter 'cook' to select a Recipe. Follow the prompts on the screen.
+6. Enter 'quit' to exit the program.
+
+**NOTE** From the Main Menu, you may enter: 'help', 'cook', 'list', or 'quit'.
+From a Category Menu, you may enter: 'help', 'cook', 'list', 'back', or 'quit'.
+If your entry is invalid, you will be prompted for a new one. 
+
 
 ## Development
 
