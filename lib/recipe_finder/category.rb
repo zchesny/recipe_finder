@@ -41,7 +41,10 @@ class RecipeFinder::Category
     self.get_recipes if self.recipes == []
     puts "\nRecipes for #{self.name}: ".colorize(:light_green)
     puts "----------------------".colorize(:light_green)
-    self.recipes.each.with_index(1){|recipe, i| puts "#{i}. #{recipe.name}".colorize(:light_green)}
+    self.recipes.sort_by{|r| r.name}.each.with_index(1) do |recipe, i| 
+      recipe.index = i 
+      puts "#{i}. #{recipe.name}".colorize(:light_green)
+    end
   end
 
   def find_recipe_by_index(index)

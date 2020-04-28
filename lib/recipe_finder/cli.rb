@@ -63,6 +63,8 @@ class RecipeFinder::CLI
     elsif input.downcase == "back"
       puts "Returning to Returning to Main Menu".colorize(:light_red)
       main_menu
+    elsif input.downcase == "quit"
+      quit
     else
       puts "Sorry, invalid entry. Please enter a valid category number from the list or enter 'back'.".colorize(:light_red)
       cook_category
@@ -120,6 +122,8 @@ class RecipeFinder::CLI
     elsif input.downcase == "back"
       puts "Returning to #{category.name} Menu.".colorize(:light_red)
       menu2(category)
+    elsif input.downcase == "quit"
+      quit
     else
       puts "Sorry, invalid entry. Please enter a valid recipe number from the list or enter 'back'.".colorize(:light_red)
       cook_recipe(category)

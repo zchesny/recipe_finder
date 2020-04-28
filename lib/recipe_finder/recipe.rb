@@ -23,12 +23,6 @@ class RecipeFinder::Recipe
     @@all
   end
 
-  def self.list
-    self.all.each.with_index(1) do |recipe, i|
-      puts "#{i}. #{recipe.name}"
-    end
-  end
-
   def open_in_browser
     system("open '#{self.url}'")
   end
